@@ -1,3 +1,26 @@
 from django.db import models
 
-# Create your models here.
+class Author(models.Model):
+    name = models.CharField(max_length=100)
+    def __str__(self):
+        return self.name
+
+class Category(models.Model):
+    name = models.CharField(max_length=100, unique=True)
+    def __str__(self):
+        return self.name
+
+class Book(models.Model):
+    title = models.CharField(max_length=100)
+    authors = models.ManyToManyField(Author)
+    year = models.IntegerField()
+    categories = models.ForeignKey(Category, on_delete=models.CASCADE)
+    genre = models.CharField(max_length=100)
+    publisher = models.CharField(max_length=100)
+    image = models.ImageField(upload_to='book_images')
+    text = models.FileField(upload_to='book_text')
+    def __str__(self):
+        return self.title
+    constraints = [
+        models.UniqueConstraint(fields=['title', 'author', 'year', 'publisher'], name='unique_book'),
+    ]
