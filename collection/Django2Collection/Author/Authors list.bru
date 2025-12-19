@@ -1,0 +1,15 @@
+meta {
+  name: Authors list
+  type: http
+  seq: 2
+}
+
+get {
+  url: {{host}}/authors
+  body: none
+  auth: inherit
+}
+
+settings {
+  encodeUrl: true
+}
