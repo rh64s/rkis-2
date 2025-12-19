@@ -14,13 +14,14 @@ class Book(models.Model):
     title = models.CharField(max_length=100)
     authors = models.ManyToManyField(Author)
     year = models.IntegerField()
-    categories = models.ForeignKey(Category, on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
     genre = models.CharField(max_length=100)
     publisher = models.CharField(max_length=100)
     image = models.ImageField(upload_to='book_images')
     text = models.FileField(upload_to='book_text')
     def __str__(self):
         return self.title
+    # уникальность
     constraints = [
         models.UniqueConstraint(fields=['title', 'author', 'year', 'publisher'], name='unique_book'),
     ]
