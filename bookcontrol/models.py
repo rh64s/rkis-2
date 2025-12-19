@@ -17,7 +17,7 @@ class Book(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     genre = models.CharField(max_length=100)
     publisher = models.CharField(max_length=100)
-    image = models.ImageField(upload_to='book_images')
+    image = models.ImageField(upload_to='book_images', null=True, blank=True)
     text = models.FileField(upload_to='book_text')
     def __str__(self):
         return self.title

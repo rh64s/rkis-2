@@ -13,18 +13,18 @@ class CategorySerializer(serializers.ModelSerializer):
 
 class BookSerializer(serializers.Serializer):
     id = serializers.IntegerField(read_only=True)
-    title = serializers.CharField(required=True, allow_blank=False, max_length=100)
+    title = serializers.CharField(required=True, max_length=100)
     authors = serializers.PrimaryKeyRelatedField(
         queryset=Author.objects.all(), many=True
     )
-    year = serializers.IntegerField(required=True, allow_blank=False, min_value=1000, max_value=9999)
-    publisher = serializers.CharField(required=True, allow_blank=False, max_length=100)
+    year = serializers.IntegerField(required=True, min_value=1000, max_value=9999)
+    publisher = serializers.CharField(required=True, max_length=100)
     category = serializers.PrimaryKeyRelatedField(
         queryset=Category.objects.all()
     )
-    genre = serializers.CharField(required=True, allow_blank=False, max_length=100)
+    genre = serializers.CharField(required=True, max_length=100)
     image = serializers.ImageField(use_url=True, required=True)
-    text = serializers.HyperlinkedRelatedField(use_url=True, required=True)
+    text = serializers.HyperlinkedIdentityField(view_name='book-text')
 
     def create(self, validated_data):
         return Book.objects.create(**validated_data)
