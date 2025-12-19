@@ -23,9 +23,9 @@ class BookSerializer(serializers.Serializer):
         queryset=Category.objects.all()
     )
     genre = serializers.CharField(required=True, max_length=100)
-    image = serializers.ImageField(use_url=True, required=True)
-    text = serializers.HyperlinkedIdentityField(view_name='book-text')
-
+    image = serializers.ImageField(use_url=True, required=False)
+    text = serializers.HyperlinkedIdentityField(view_name='book-text', required=False)
+    
     def create(self, validated_data):
         return Book.objects.create(**validated_data)
 

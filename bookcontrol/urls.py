@@ -4,6 +4,7 @@ from bookcontrol import views
 urlpatterns = [
     path('books/', views.BookList.as_view(), name='book-list'),
     path('books/<int:pk>/', views.BookDetail.as_view(), name='book-detail'),
+    path('books/<int:pk>/files', views.bookDetailFiles, name='book-files'),
     path('categories/', views.CategoryList.as_view(), name='category-list'),
     path('categories/<int:pk>/', views.CategoryDetail.as_view(), name='category-detail'),
     path('authors/', views.AuthorList.as_view(), name='author-list'),
